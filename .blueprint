@@ -1,0 +1,25 @@
+created:
+    - database/factories/ConferenceFactory.php
+    - database/factories/VenueFactory.php
+    - database/factories/SpeakerFactory.php
+    - database/factories/TalkFactory.php
+    - database/migrations/2024_01_15_184736_create_conferences_table.php
+    - database/migrations/2024_01_15_184737_create_venues_table.php
+    - database/migrations/2024_01_15_184738_create_speakers_table.php
+    - database/migrations/2024_01_15_184739_create_talks_table.php
+    - database/migrations/2024_01_15_184740_create_speaker_venue_table.php
+    - database/migrations/2024_01_15_184741_create_talk_venue_table.php
+    - app/Models/Conference.php
+    - app/Models/Venue.php
+    - app/Models/Speaker.php
+    - app/Models/Talk.php
+    - database/seeders/ConferenceSeeder.php
+    - database/seeders/VenueSeeder.php
+    - database/seeders/SpeakerSeeder.php
+    - database/seeders/TalkSeeder.php
+models:
+    User: { name: string, email: string, email_verified_at: 'datetime nullable', password: string, remember_token: 'string:100 nullable' }
+    Conference: { name: string, city: string, country: string, postcode: 'int:20', relationships: { hasMany: 'Venue, Speaker, Talk' } }
+    Venue: { name: string, description: string, region: string, startingDate: datetime, endingDate: datetime, status: 'enum:WIP,Cancelled,On going,Ended' }
+    Speaker: { name: string, biography: string, twitter: string, relationships: { hasMany: Talk, belongsToMany: Venue } }
+    Talk: { speaker_id: id, title: string, description: string, relationships: { belongsToMany: Venue } }
